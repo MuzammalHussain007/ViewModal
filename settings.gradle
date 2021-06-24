@@ -1,0 +1,2 @@
+rootProject.name = "ViewModal"
+include ':app'
