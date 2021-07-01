@@ -1,6 +1,7 @@
 package com.be.viewmodal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -25,14 +26,19 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.total_score);
         add_score = findViewById(R.id.total_score_btn);
         scoreViewModal = ViewModelProviders.of(this).get(ScoreViewModal.class);
-        scoreViewModal.getScore();
-        textView.setText(String.valueOf(scoreViewModal.getScore()));
+//        scoreViewModal.getScore();
+//        textView.setText(String.valueOf(scoreViewModal.getScore()));
+        scoreViewModal.getScore().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                 textView.setText(String.valueOf(integer));
+            }
+        });
 
 
 
         add_score.setOnClickListener(v -> {
             scoreViewModal.setScore();
-            textView.setText(String.valueOf(scoreViewModal.getScore()));
                     });
     }
 }
